@@ -540,8 +540,9 @@ def run_student_app() -> None:
     first run, starts the monitoring thread, and installs itself into
     the Startup folder so it runs at login.
     """
-    base_dir = Path(__file__).resolve().parent
-    config_path = base_dir / "middle_school_config.json"
+    config_dir = Path(os.environ.get('APPDATA', Path.home())) / 'SkaphysicsHomeworkReminder'
+config_dir.mkdir(parents=True, exist_ok=True)
+config_path = config_dir / 'student_config.json'
     config: Dict[str, object] = {}
     if config_path.exists():
         try:
