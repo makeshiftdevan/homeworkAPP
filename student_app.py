@@ -538,8 +538,9 @@ class ReminderApp:
 
 def main() -> None:
     # Determine the directory of the running script
-    base_dir = Path(__file__).resolve().parent
-    config_path = base_dir / "student_config.json"
+    config_dir = Path(os.environ.get('APPDATA', Path.home())) / 'SkaphysicsHomeworkReminder'
+config_dir.mkdir(parents=True, exist_ok=True)
+config_path = config_dir / 'student_config.json'
     config: Dict[str, Any] = load_config(config_path)
     # Retrieve existing configuration values
     period: Optional[int] = config.get("period")
