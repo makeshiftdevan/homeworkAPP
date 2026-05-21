@@ -201,8 +201,9 @@ def main() -> None:
     passed to the scheduler so that midday times are calculated
     correctly.
     """
-    base_dir = Path(__file__).resolve().parent
-    config_path = base_dir / "all_classes_config.json"
+    config_dir = Path(os.environ.get('APPDATA', Path.home())) / 'SkaphysicsHomeworkReminder'
+    config_dir.mkdir(parents=True, exist_ok=True)
+    config_path = config_dir / 'student_config.json'
     config: Dict[str, Any] = load_config(config_path)
     lunch_option: Optional[str] = config.get("lunch_option")
     if lunch_option not in {"1", "2"}:
